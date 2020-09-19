@@ -76,5 +76,5 @@ def handle_event():
     repo = g.get_repo("KoStard/petrol_price_history_arm")
     key = datetime.now().date().isoformat()
     # github.GithubException.GithubException -> if already present
-    repo.create_file(key, "Adding content for {}".format(key), serialized_messages)
+    repo.create_file("history/{}.json".format(key), "Adding content for {}".format(key), serialized_messages)
     return serialized_messages
