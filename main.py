@@ -68,7 +68,7 @@ def execute_handlers():
     return messages
 
 
-def handle_event():
+def handle_event(arg1=None, arg2=None):
     token = os.environ['TOKEN']
     messages = execute_handlers()
     serialized_messages = json.dumps(messages)
