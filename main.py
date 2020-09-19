@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-import datetime
 import json
 from github import Github
 from datetime import datetime
@@ -25,7 +24,7 @@ def generate_message(volume,
         "price": price,
         "type": fuel_type,
         "provider": provider,
-        "date": datetime.datetime.now().date().isoformat()
+        "date": datetime.now().date().isoformat()
     }
 
 
