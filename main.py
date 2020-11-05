@@ -1,10 +1,11 @@
+import json
+import os
+import re
+from datetime import datetime, timezone
+
 import requests
 from bs4 import BeautifulSoup
-import re
-import json
 from github import Github
-from datetime import datetime, timezone
-import os
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 '
@@ -43,9 +44,12 @@ def handle_maxoil():
     volume_matcher = re.compile(r"(?P<volume>\d+)(?P<uom>\w+)")
     new_messages = []
     for item in items:
-        item_text = item.get_text()
+        item_text = item.get_text().strip()
+        if not item_text:
+            continue
+        print(f"Got item text for maxoil: {item_text}")
         name, price_label = [e.strip() for e in item_text.split("-")]
-        volume_label, price, currency = price_label.split(" ")
+        volume_label, price, currency = price_label.split()
         volume_match = volume_matcher.match(volume_label)
         volume_match_dict = volume_match.groupdict()
         volume = volume_match_dict['volume']
